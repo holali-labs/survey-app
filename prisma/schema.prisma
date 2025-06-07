@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id      String   @id
+  email   String?  @unique
+  name    String?
+  surveys Survey[]
+
+  @@map("users")
+}
+
+model Survey {
+  id          String     @id @default(uuid())
+  userId      String
+  title       String
+  description String?
+  isPublic    Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  questions   Question[]
+  responses   Response[]
+  User        User       @relation(fields: [userId], references: [id])
+
+  @@map("surveys")
+}
+
+model Question {
+  id         String       @id @default(uuid())
+  surveyId   String
+  type       QuestionType
+  label      String
+  isRequired Boolean      @default(false)
+  order      Int
+  fileUrl    String?
+  answers    Answer[]
+  choices    Choice[]
+  survey     Survey       @relation(fields: [surveyId], references: [id])
+
+  @@map("questions")
+}
+
+model Choice {
+  id         String   @id @default(cuid())
+  questionId String
+  label      String
+  order      Int
+  question   Question @relation(fields: [questionId], references: [id])
+
+  @@map("choices")
+}
+
+model Response {
+  id          String   @id @default(cuid())
+  surveyId    String
+  submittedAt DateTime @default(now())
+  answers     Answer[]
+  survey      Survey   @relation(fields: [surveyId], references: [id])
+
+  @@map("responses")
+}
+
+model Answer {
+  id           String   @id @default(cuid())
+  responseId   String
+  questionId   String
+  valueText    String?
+  valueChoices String[]
+  question     Question @relation(fields: [questionId], references: [id])
+  response     Response @relation(fields: [responseId], references: [id])
+
+  @@map("answers")
+}
+
+enum QuestionType {
+  short
+  long
+  single
+  multi
+  file_read
+}
