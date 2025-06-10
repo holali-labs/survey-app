@@ -19,63 +19,68 @@ model User {
 }
 
 model Survey {
-  id          String     @id @default(uuid())
+  id          String    @id @default(uuid())
   userId      String
   title       String
   description String?
-  isPublic    Boolean    @default(false)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  questions   Question[]
-  responses   Response[]
-  User        User       @relation(fields: [userId], references: [id])
+  isPublic    Boolean   @default(false)
+  created_at  DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime? @updatedAt @db.Timestamptz(6)
+
+  questions Question[]
+  responses Response[]
+  User      User       @relation(fields: [userId], references: [id])
 
   @@map("surveys")
 }
 
 model Question {
-  id         String       @id @default(uuid())
+  id         BigInt       @id @default(autoincrement())
   surveyId   String
   type       QuestionType
   label      String
   isRequired Boolean      @default(false)
   order      Int
   fileUrl    String?
-  answers    Answer[]
-  choices    Choice[]
-  survey     Survey       @relation(fields: [surveyId], references: [id])
+
+  answers Answer[]
+  choices Choice[]
+  survey  Survey   @relation(fields: [surveyId], references: [id])
 
   @@map("questions")
 }
 
 model Choice {
-  id         String   @id @default(cuid())
-  questionId String
+  id         BigInt @id @default(autoincrement())
+  questionId BigInt
   label      String
   order      Int
-  question   Question @relation(fields: [questionId], references: [id])
+
+  question Question @relation(fields: [questionId], references: [id])
 
   @@map("choices")
 }
 
 model Response {
-  id          String   @id @default(cuid())
+  id          BigInt   @id @default(autoincrement())
   surveyId    String
   submittedAt DateTime @default(now())
-  answers     Answer[]
-  survey      Survey   @relation(fields: [surveyId], references: [id])
+
+  answers Answer[]
+  survey  Survey   @relation(fields: [surveyId], references: [id])
 
   @@map("responses")
 }
 
 model Answer {
-  id           String   @id @default(cuid())
-  responseId   String
-  questionId   String
+  id           BigInt   @id @default(autoincrement())
+  responseId   BigInt
+  questionId   BigInt
   valueText    String?
   valueChoices String[]
-  question     Question @relation(fields: [questionId], references: [id])
-  response     Response @relation(fields: [responseId], references: [id])
+
+  question Question @relation(fields: [questionId], references: [id])
+  response Response @relation(fields: [responseId], references: [id])
 
   @@map("answers")
 }
