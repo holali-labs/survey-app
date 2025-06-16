@@ -46,7 +46,6 @@ async function onLikeClick() {
 function App() {
   return (
     <AuthGuard>
-      {' '}
       {/* Wrapper handles auth check */}
       <LoginStartPage />
     </AuthGuard>
