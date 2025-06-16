@@ -92,3 +92,9 @@ enum QuestionType {
   multi
   file_read
 }
+
+enum Provider {
+  google
+  kakao
+  local
+}
