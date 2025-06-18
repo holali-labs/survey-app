@@ -1,0 +1,27 @@
+'use client';
+
+import { Button } from '@/components/ui/button';
+import { createClient } from '@/lib/supabase/client';
+
+type Props = {
+  children: React.ReactNode;
+  provider: 'google' | 'kakao';
+};
+export function LoginButton({ provider, children }: Props) {
+  const supabase = createClient();
+
+  return (
+    <Button
+      variant="outline"
+      className="w-full"
+      onClick={async () => {
+        await supabase.auth.signInWithOAuth({
+          provider,
+          options: { redirectTo: 'http://localhost:3000/auth/callback' }
+        });
+      }}
+    >
+      {children}
+    </Button>
+  );
+}
