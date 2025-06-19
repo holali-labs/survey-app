@@ -19,7 +19,7 @@ import {
   IconUsers
 } from '@tabler/icons-react';
 
-import { NavDocuments } from '@/components/nav-documents';
+import { NavSurveys } from '@/components/nav-surveys';
 import { NavMain } from '@/components/nav-main';
 import { NavSecondary } from '@/components/nav-secondary';
 import { NavUser } from '@/components/nav-user';
@@ -36,37 +36,10 @@ import { Layers as ByForm } from 'lucide-react';
 
 const data = {
   user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg'
+    name: '유대상',
+    email: 'holali@byform.com'
   },
-  navMain: [
-    {
-      title: 'Dashboard',
-      url: '#',
-      icon: IconDashboard
-    },
-    {
-      title: 'Lifecycle',
-      url: '#',
-      icon: IconListDetails
-    },
-    {
-      title: 'Analytics',
-      url: '#',
-      icon: IconChartBar
-    },
-    {
-      title: 'Projects',
-      url: '#',
-      icon: IconFolder
-    },
-    {
-      title: 'Team',
-      url: '#',
-      icon: IconUsers
-    }
-  ],
+  navMain: [],
   navClouds: [
     {
       title: 'Capture',
@@ -132,21 +105,18 @@ const data = {
       icon: IconSearch
     }
   ],
-  documents: [
+  surveys: [
     {
       name: 'Data Library',
-      url: '#',
-      icon: IconDatabase
+      url: '#'
     },
     {
       name: 'Reports',
-      url: '#',
-      icon: IconReport
+      url: '#'
     },
     {
       name: 'Word Assistant',
-      url: '#',
-      icon: IconFileWord
+      url: '#'
     }
   ]
 };
@@ -167,8 +137,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
+        <NavMain />
+        <NavSurveys items={data.surveys} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
