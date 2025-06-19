@@ -27,6 +27,7 @@ model Survey {
   isPublic    Boolean   @default(false)
   createdAt   DateTime  @default(now()) @db.Timestamptz(6)
   updatedAt   DateTime? @updatedAt @db.Timestamptz(6)
+  expiredAt   DateTime?
 
   questions Question[]
   responses Response[]
