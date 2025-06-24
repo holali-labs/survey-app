@@ -12,6 +12,7 @@ export function LoginButton({ provider, children }: Props) {
 
   return (
     <Button
+      type="button"
       variant="outline"
       className="w-full"
       onClick={async () => {
