@@ -1,9 +1,8 @@
-'use client';
-
 import { IconPlus, IconFileSmile } from '@tabler/icons-react';
 
 import { Button } from '@/components/ui/button';
 import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuItem } from '@/components/ui/sidebar';
+import Link from 'next/link';
 
 export function NavMain() {
   return (
@@ -17,14 +16,16 @@ export function NavMain() {
                 <span>설문 생성</span>
               </div>
             </div>
-            <Button
-              size="icon"
-              className="size-8 group-data-[collapsible=icon]:opacity-0 cursor-pointer"
-              variant="outline"
-            >
-              <IconPlus />
-              <span className="sr-only">설문 생성</span>
-            </Button>
+            <Link href="/survey/create">
+              <Button
+                size="icon"
+                className="size-8 group-data-[collapsible=icon]:opacity-0 cursor-pointer"
+                variant="outline"
+              >
+                <IconPlus />
+                <span className="sr-only">설문 생성</span>
+              </Button>
+            </Link>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroupContent>
