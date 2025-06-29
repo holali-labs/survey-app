@@ -24,9 +24,16 @@ export function SurveyForm() {
     }
   });
 
-  const onSubmit = (values: Schema) => {
-    // TODO: 설문 저장
-    console.log(values);
+  const onSubmit = async (values: Schema) => {
+    const response = await fetch('/api/survey', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(values)
+    });
+    const data = await response.json();
+    console.log(data);
   };
 
   return (
