@@ -18,7 +18,7 @@ export function LoginButton({ provider, children }: Props) {
       onClick={async () => {
         await supabase.auth.signInWithOAuth({
           provider,
-          options: { redirectTo: 'http://localhost:3000/auth/callback' }
+          options: { redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback` }
         });
       }}
     >
