@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "orm": "pnpm dlx prisma",
+    "orm:update": "dotenv -e .env.local pnpm orm generate && dotenv -e .env.local pnpm orm migrate dev --name update_db",
     "ui:add": "pnpm dlx shadcn@latest add",
     "cf:build": "opennextjs-cloudflare build",
     "cf:preview": "opennextjs-cloudflare preview",
