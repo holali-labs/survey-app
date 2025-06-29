@@ -37,7 +37,7 @@ export default function Page() {
               </RadioGroup>
             </div>
             <div className="grid gap-2">
-              <Label>자동 종료 조건</Label>
+              <Label>설문 종료 조건</Label>
               <RadioGroup className="flex flex-col gap-2" defaultValue="none">
                 <div className="flex items-center gap-1">
                   <RadioGroupItem id="count" value="count" />
