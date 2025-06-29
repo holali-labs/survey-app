@@ -23,36 +23,6 @@ export default function Page() {
               <Label htmlFor="description">설명</Label>
               <Textarea className="min-h-[100px]" id="description" placeholder="설문 설명" required />
             </div>
-            <div className="grid gap-2">
-              <Label>공개 여부</Label>
-              <RadioGroup className="flex flex-col gap-2" defaultValue="public">
-                <div className="flex items-center gap-1">
-                  <RadioGroupItem id="public" value="public" />
-                  <Label htmlFor="public">공개 (공개링크 제공)</Label>
-                </div>
-                <div className="flex items-center gap-1">
-                  <RadioGroupItem id="private" value="private" />
-                  <Label htmlFor="private">비공개 (비밀링크 제공)</Label>
-                </div>
-              </RadioGroup>
-            </div>
-            <div className="grid gap-2">
-              <Label>설문 종료 조건</Label>
-              <RadioGroup className="flex flex-col gap-2" defaultValue="none">
-                <div className="flex items-center gap-1">
-                  <RadioGroupItem id="count" value="count" />
-                  <Label htmlFor="count">응답수</Label>
-                </div>
-                <div className="flex items-center gap-1">
-                  <RadioGroupItem id="date" value="date" />
-                  <Label htmlFor="date">날짜</Label>
-                </div>
-                <div className="flex items-center gap-1">
-                  <RadioGroupItem id="none" value="none" />
-                  <Label htmlFor="none">없음</Label>
-                </div>
-              </RadioGroup>
-            </div>
           </div>
         </form>
       </CardContent>
