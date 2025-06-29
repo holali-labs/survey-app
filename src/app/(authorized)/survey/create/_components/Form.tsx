@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 const schema = z.object({
   title: z.string().min(1, '설문 제목을 입력하세요.').max(100, '설문 제목은 100자 이하로 입력하세요.'),
@@ -24,6 +25,7 @@ export function SurveyForm() {
     }
   });
 
+  const router = useRouter();
   const onSubmit = async (values: Schema) => {
     const response = await fetch('/api/survey', {
       method: 'POST',
@@ -32,8 +34,8 @@ export function SurveyForm() {
       },
       body: JSON.stringify(values)
     });
-    const data = await response.json();
-    console.log(data);
+    const newSurvey = await response.json();
+    router.push(`/survey/${newSurvey.id}`);
   };
 
   return (
