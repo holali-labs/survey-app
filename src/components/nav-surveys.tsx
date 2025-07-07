@@ -18,27 +18,22 @@ import {
   SidebarMenuItem,
   useSidebar
 } from '@/components/ui/sidebar';
+import Link from 'next/link';
+import { SummarizedSurveys } from '@/app/_types/survey';
 
-export function NavSurveys({
-  items
-}: {
-  items: {
-    name: string;
-    url: string;
-  }[];
-}) {
+export function NavSurveys({ surveys }: { surveys: SummarizedSurveys[] }) {
   const { isMobile } = useSidebar();
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>설문조사</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map(item => (
-          <SidebarMenuItem key={item.name}>
+        {surveys.map(item => (
+          <SidebarMenuItem key={item.id}>
             <SidebarMenuButton asChild>
-              <a href={item.url}>
-                <span>{item.name}</span>
-              </a>
+              <Link href={`/survey/${item.id}`}>
+                <span>{item.title}</span>
+              </Link>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

@@ -1,23 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import {
-  IconCamera,
-  IconChartBar,
-  IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconHelp,
-  IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
-  IconSearch,
-  IconSettings,
-  IconUsers
-} from '@tabler/icons-react';
+import { IconCamera, IconFileAi, IconFileDescription, IconHelp, IconSearch, IconSettings } from '@tabler/icons-react';
 
 import { NavSurveys } from '@/components/nav-surveys';
 import { NavMain } from '@/components/nav-main';
@@ -33,6 +17,9 @@ import {
   SidebarMenuItem
 } from '@/components/ui/sidebar';
 import { Layers as ByForm } from 'lucide-react';
+import { Skeleton } from '../../../components/ui/skeleton';
+import { Suspense } from 'react';
+import { useFetchSurveys } from '../_hooks/useFetchSurveys';
 
 const data = {
   user: {
@@ -104,24 +91,12 @@ const data = {
       url: '#',
       icon: IconSearch
     }
-  ],
-  surveys: [
-    {
-      name: 'Data Library',
-      url: '#'
-    },
-    {
-      name: 'Reports',
-      url: '#'
-    },
-    {
-      name: 'Word Assistant',
-      url: '#'
-    }
   ]
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const surveys = useFetchSurveys();
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -138,7 +113,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain />
-        <NavSurveys items={data.surveys} />
+        <Suspense fallback={<Skeleton className="h-10 w-full" />}>
+          <NavSurveys surveys={surveys} />
+        </Suspense>
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
