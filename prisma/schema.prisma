@@ -33,6 +33,7 @@ model Survey {
   responses Response[]
   User      User       @relation(fields: [userId], references: [id])
 
+  @@index([userId])
   @@map("surveys")
 }
 
@@ -49,6 +50,7 @@ model Question {
   choices Choice[]
   survey  Survey   @relation(fields: [surveyId], references: [id])
 
+  @@index([surveyId])
   @@map("questions")
 }
 
@@ -60,6 +62,7 @@ model Choice {
 
   question Question @relation(fields: [questionId], references: [id])
 
+  @@index([questionId])
   @@map("choices")
 }
 
@@ -71,6 +74,8 @@ model Response {
   answers Answer[]
   survey  Survey   @relation(fields: [surveyId], references: [id])
 
+  @@index([surveyId])
+  @@index([submittedAt])
   @@map("responses")
 }
 
@@ -84,6 +89,9 @@ model Answer {
   question Question @relation(fields: [questionId], references: [id])
   response Response @relation(fields: [responseId], references: [id])
 
+  @@index([responseId])
+  @@index([questionId])
+  @@index([responseId, questionId])
   @@map("answers")
 }
 
